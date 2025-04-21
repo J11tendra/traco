@@ -38,6 +38,7 @@ const app = express();
 const http = require("http");
 const path = require("path");
 const socketio = require("socket.io");
+const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
 const io = socketio(server);
@@ -83,6 +84,10 @@ app.post("/gps", (req, res) => {
   res.sendStatus(200);
 });
 
-server.listen(3000, () => {
-  console.log("Server listening on http://localhost:3000");
+// server.listen(3000, () => {
+//   console.log("Server listening on http://localhost:3000");
+// });
+
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
