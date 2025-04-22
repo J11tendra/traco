@@ -210,6 +210,12 @@ L.control.layers(baseMaps).addTo(map);
 // Marker storage and centering logic
 const markers = {};
 const centeredDevices = new Set();
+const esp32Icon = L.icon({
+    iconUrl: '/images/car.png',
+    iconSize: [40, 40],
+    iconAnchor: [20, 20],
+    popupAnchor: [0, -20]
+});
 
 // Listen for location data from server (multiple devices)
 socket.on("receive-location", (data) => {
@@ -225,7 +231,7 @@ socket.on("receive-location", (data) => {
     if (markers[id]) {
         markers[id].setLatLng([latitude, longitude]);
     } else {
-        markers[id] = L.marker([latitude, longitude])
+        markers[id] = L.marker([latitude, longitude], { icon: esp32Icon })
             .addTo(map)
             .bindPopup(`Device ID: ${id}`);
     }
